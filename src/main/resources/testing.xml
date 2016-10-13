@@ -13,5 +13,8 @@
         <classes>
             <class name="smart4aviation.tests.TestingMainClass" />
         </classes>
+        <listeners>
+            <listener class-name="smart4aviation.utilities.TestFailListener"/>
+        </listeners>
     </test>
 </suite>

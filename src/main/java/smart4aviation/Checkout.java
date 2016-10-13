@@ -22,7 +22,7 @@ public class Checkout {
     private static final String PAYMENT_METHOD_NEXT_STEP_BUTTON1 = "payment-method-next-step-button";
     private static final String PAYMENT_INFO_NEXT_STEP_BUTTON = "payment-info-next-step-button";
     private static final String PAYMENT_INFO_NEXT_STEP_BUTTON1 = "payment-info-next-step-button";
-    private static final String THANK_YOU = "html/body/div[5]/div[3]/div/div/div/div[2]/div/div[1]/strong";
+    private static final String THANK_YOU = "//body//div[2]/div/div[1]/strong";
     private WebDriver webDriver;
     private WebDriverWait wait;
 

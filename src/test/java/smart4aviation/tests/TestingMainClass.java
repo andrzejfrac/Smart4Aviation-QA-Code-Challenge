@@ -8,10 +8,7 @@ import smart4aviation.Checkout;
 import smart4aviation.HomePage;
 import smart4aviation.SearchResultPage;
 import smart4aviation.ShoppingCart;
-import smart4aviation.utilities.BillingAddress;
-import smart4aviation.utilities.BrowserFactory;
-import smart4aviation.utilities.TestUser;
-import smart4aviation.utilities.Utilities;
+import smart4aviation.utilities.*;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -46,6 +43,7 @@ public class TestingMainClass {
                 new Dimension(Integer.parseInt(dimensions.split(":")[0]), Integer.parseInt(dimensions.split(":")[1])));
         billingAddress = new BillingAddress("United States", "New York", "New York", "Lee", "10765", "123456789");
         testUser = new TestUser(billingAddress);
+        new TestFailListener().setDriver(webDriver);
     }
 
     @Test(groups = {"important"})
@@ -61,8 +59,8 @@ public class TestingMainClass {
     public void searchForProduct() {
         SearchResultPage searchResultPage = home.sendToSearchBox(PRODUCT_TO_LOOK_FOR);
         shoppingCart = searchResultPage.getItem(PRODUCT_TO_LOOK_FOR).navigateToCart();
-//        assertEquals(shoppingCart.getProductsInShoppingCart().toLowerCase(),PRODUCT_TO_LOOK_FOR.toLowerCase(),
-//                "Verifying HTC One Mini Blue is in the cart");
+        assertEquals(shoppingCart.getProductsInShoppingCart().toLowerCase(),PRODUCT_TO_LOOK_FOR.toLowerCase(),
+                "Verifying HTC One Mini Blue is in the cart");
     }
 
     @Test(groups = {"important"}, dependsOnMethods = {"searchForProduct"})
@@ -75,12 +73,12 @@ public class TestingMainClass {
                 "Final Confirmation message is displayed");
     }
 
-    @AfterMethod(groups = {"important"})
-    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
-        if (testResult.getStatus() == ITestResult.FAILURE) {
-            Utilities.takeScreenShot(webDriver);
-        }
-    }
+//    @AfterMethod(groups = {"important"})
+//    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
+//        if (testResult.getStatus() == ITestResult.FAILURE) {
+//            Utilities.takeScreenShot(webDriver);
+//        }
+//    }
 
     @AfterSuite(groups = {"important"})
     public void tearDown() {

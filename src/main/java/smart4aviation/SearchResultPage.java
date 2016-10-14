@@ -1,7 +1,10 @@
 package smart4aviation;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,8 +31,10 @@ public class SearchResultPage {
     }
 
     public ShoppingCart navigateToCart() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(CART_LABEL)));
-        webDriver.findElement(By.className(CART_LABEL)).click();
+        WebElement menuElement = webDriver.findElement(By.xpath(".//*[@id='topcartlink']/a/span[1]"));
+
+        JavascriptExecutor js = (JavascriptExecutor)webDriver;
+        js.executeScript("arguments[0].click();", webDriver.findElement(By.xpath(".//*[@id='flyout-cart']/div/div[4]/input")));
         return new ShoppingCart(webDriver);
     }
 }

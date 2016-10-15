@@ -15,9 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 
-/**
- * Created by Andy on 9/17/2016.
- */
 public class TestingMainClass {
     private static final String PRODUCT_TO_LOOK_FOR = "HTC One Mini Blue";
     private static final String CONFIRMATION_MESSAGE = "Your order has been successfully processed!";
@@ -71,6 +68,7 @@ public class TestingMainClass {
                 .paymentConfirmation();
         assertEquals(checkout.getFinalConfimationMessage().toLowerCase(), CONFIRMATION_MESSAGE.toLowerCase(),
                 "Final Confirmation message is displayed");
+        System.out.println("to jest juz koniec");
     }
 
 //    @AfterMethod(groups = {"important"})

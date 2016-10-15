@@ -3,14 +3,14 @@ package smart4aviation.utilities;
 import java.util.UUID;
 
 public class TestUser {
-    private String firstName= UUID.randomUUID().toString();
-    private String lastName=firstName;
-    private String email=firstName+"@example.com";
-    private String password="6characters";
+    private String firstName = UUID.randomUUID().toString();
+    private String lastName = firstName;
+    private String email = firstName + "@example.com";
+    private String password = "6characters";
     private BillingAddress billingAddress;
 
     public TestUser(BillingAddress billingAddress) {
-        this.billingAddress=billingAddress;
+        this.billingAddress = billingAddress;
     }
 
     public BillingAddress getBillingAddress() {

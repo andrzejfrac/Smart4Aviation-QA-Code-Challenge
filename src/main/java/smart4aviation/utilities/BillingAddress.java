@@ -1,8 +1,5 @@
 package smart4aviation.utilities;
 
-/**
- * Created by Andy on 10/7/2016.
- */
 public class BillingAddress {
     private String country;
     private String stateProvince;

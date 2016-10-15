@@ -1,17 +1,17 @@
 <suite name="Smart4Aviation" verbose="1">
-    <parameter name="URLAddress" value="http://demo.nopcommerce.com" />
+    <parameter name="URLAddress" value="http://demo.nopcommerce.com"/>
     <test name="Smart4Aviation group Test">
         <groups>
             <define name="include-group">
-                <include name="important" />
+                <include name="important"/>
             </define>
             <run>
-                <include name="include-group" />
-                <exclude name="exclude-group" />
+                <include name="include-group"/>
+                <exclude name="exclude-group"/>
             </run>
         </groups>
         <classes>
-            <class name="smart4aviation.tests.TestingMainClass" />
+            <class name="smart4aviation.tests.TestingMainClass"/>
         </classes>
         <listeners>
             <listener class-name="smart4aviation.utilities.TestFailListener"/>

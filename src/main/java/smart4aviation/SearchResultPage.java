@@ -20,7 +20,7 @@ public class SearchResultPage {
     public SearchResultPage getItem(String item) {
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText(item)));
         webDriver.findElement(By.linkText(item)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.className(PRODUCT_BOX_ADD_TO_CART_BUTTON)));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className(PRODUCT_BOX_ADD_TO_CART_BUTTON)));
         webDriver.findElement(By.className(PRODUCT_BOX_ADD_TO_CART_BUTTON)).click();
         return this;
     }

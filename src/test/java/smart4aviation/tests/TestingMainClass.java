@@ -2,15 +2,19 @@ package smart4aviation.tests;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import smart4aviation.Checkout;
 import smart4aviation.HomePage;
 import smart4aviation.SearchResultPage;
 import smart4aviation.ShoppingCart;
-import smart4aviation.utilities.*;
+import smart4aviation.utilities.BillingAddress;
+import smart4aviation.utilities.BrowserFactory;
+import smart4aviation.utilities.TestFailListener;
+import smart4aviation.utilities.TestUser;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
@@ -31,7 +35,6 @@ public class TestingMainClass {
     public void setUp(String addressUrl) {
         ADDRESS_URL = addressUrl;
         String dimensions = System.getProperty("size");
-        System.out.println("Current driver is  " + System.getProperty("driver"));
         webDriver = BrowserFactory.getWebDriver(System.getProperty("driver"));
         webDriver.manage()
                 .timeouts()
@@ -51,13 +54,13 @@ public class TestingMainClass {
                 .register(testUser);
         assertEquals(home.getUserEmail(), testUser.getEmail(), "Verifying registration");
     }
-//mvn -Dbrowser=ie -Dsize=1200:900 clean test
+
     @Test(groups = {"important"}, dependsOnMethods = {"registrationProcessTest"})
     public void searchForProduct() {
         SearchResultPage searchResultPage = home.sendToSearchBox(PRODUCT_TO_LOOK_FOR);
         shoppingCart = searchResultPage.getItem(PRODUCT_TO_LOOK_FOR).navigateToCart();
-//        assertEquals(shoppingCart.getProductsInShoppingCart().toLowerCase(),PRODUCT_TO_LOOK_FOR.toLowerCase(),
-//                "Verifying cart content: ");
+        assertEquals(shoppingCart.getProductsInShoppingCart().toLowerCase(), PRODUCT_TO_LOOK_FOR.toLowerCase(),
+                "Verifying cart content: ");
     }
 
     @Test(groups = {"important"}, dependsOnMethods = {"searchForProduct"})
@@ -68,15 +71,7 @@ public class TestingMainClass {
                 .paymentConfirmation();
         assertEquals(checkout.getFinalConfimationMessage().toLowerCase(), CONFIRMATION_MESSAGE.toLowerCase(),
                 "Final Confirmation message is displayed");
-        System.out.println("to jest juz koniec");
     }
-
-//    @AfterMethod(groups = {"important"})
-//    public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
-//        if (testResult.getStatus() == ITestResult.FAILURE) {
-//            Utilities.takeScreenShot(webDriver);
-//        }
-//    }
 
     @AfterSuite(groups = {"important"})
     public void tearDown() {
